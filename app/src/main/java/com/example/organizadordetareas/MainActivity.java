@@ -1,7 +1,9 @@
 package com.example.organizadordetareas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,6 +18,7 @@ import com.example.organizadordetareas.Fragment.MainFragment;
 import com.example.organizadordetareas.Fragment.calendarioFragment;
 import com.example.organizadordetareas.Fragment.configFragment;
 import com.example.organizadordetareas.Fragment.mylistFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FloatingActionButton fab = findViewById(R.id.fab);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -82,5 +86,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
             fragmentTransaction.commit();
         }
         return false;
+    }
+
+    public void openAdd(View view) {
+        Intent intent = new Intent(this, AddTaskActivity.class);
+        startActivity(intent);
     }
 }
