@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="426dp"
         android:layout_height="163dp"
-        android:background="#6200EE"
+        android:background="@color/colorPrimary"
         android:padding="20dp"
         android:text="@string/app_name"
         android:textColor="@color/design_default_color_background"
