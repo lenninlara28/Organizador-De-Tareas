@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.container, new MainFragment());
         fragmentTransaction.commit();
+
+        //BASE DE DATOS
+        ConexionSqLiteHelper conn= new ConexionSqLiteHelper(this,"db_tareas",null,1);
+
     }
 
     @Override
@@ -92,4 +96,5 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         Intent intent = new Intent(this, AddTaskActivity.class);
         startActivity(intent);
     }
+
 }

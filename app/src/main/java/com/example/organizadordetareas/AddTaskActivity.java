@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.view.View;
@@ -12,6 +14,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.example.organizadordetareas.utilidades.Utilidades;
 
 import java.util.Calendar;
 
@@ -21,7 +26,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     private static final String BARRA = "/";
     private static final String DOS_PUNTOS = ":";
 
-    EditText fecha, hora;
+    EditText fecha, hora, tarea;
     ImageButton addFecha, addHora;
 
     public final Calendar c = Calendar.getInstance();
@@ -38,6 +43,7 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
+        tarea = (EditText) findViewById(R.id.txtTarea);
         fecha = (EditText) findViewById(R.id.txtFecha);
         hora = (EditText) findViewById(R.id.txtHora);
         addFecha = (ImageButton)findViewById(R.id.addFecha);
@@ -53,10 +59,14 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
                 obtenerFecha();
                 break;
             case R.id.addHora:
-                obtenerHora();
+                ingresaTarea();
+                break;
+            case R.id.addTask:
+                ingresaTarea();
                 break;
         }
     }
+
 
     private void obtenerFecha(){
         DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -91,7 +101,21 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
                 hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + " " + AM_PM);
             }
         }, hour, minute, false);
-
         recogerHora.show();
+    }
+
+    private void ingresaTarea() {
+        ConexionSqLiteHelper conn= new ConexionSqLiteHelper(this,"db_tareas",null,1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Utilidades.CAMPO_TAREA,tarea.getText().toString());
+        values.put(Utilidades.CAMPO_FECHA,fecha.getText().toString());
+        values.put(Utilidades.CAMPO_HORA,hora.getText().toString());
+
+        Long idResultante = db.insert(Utilidades.TABLA_TAREAS,Utilidades.CAMPO_TAREA,values);
+        Toast.makeText(getApplicationContext(),"Se Ingreso Tarea : "+ idResultante ,Toast.LENGTH_SHORT).show();
+        db.close();
+
     }
 }
