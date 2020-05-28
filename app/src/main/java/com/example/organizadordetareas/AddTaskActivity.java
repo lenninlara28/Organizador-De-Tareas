@@ -7,9 +7,7 @@ import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -51,22 +49,22 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
 
         addFecha.setOnClickListener(this);
         addHora.setOnClickListener(this);
+
     }
 
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.addTask:
+                ingresaTarea();
+                break;
             case R.id.addFecha:
                 obtenerFecha();
                 break;
             case R.id.addHora:
-                ingresaTarea();
-                break;
-            case R.id.addTask:
-                ingresaTarea();
+                obtenerHora();
                 break;
         }
     }
-
 
     private void obtenerFecha(){
         DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -105,17 +103,24 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void ingresaTarea() {
-        ConexionSqLiteHelper conn= new ConexionSqLiteHelper(this,"db_tareas",null,1);
-        SQLiteDatabase db = conn.getWritableDatabase();
+        if(tarea.getText().toString().trim().isEmpty() || fecha.getText().toString().trim().isEmpty() || hora.getText().toString().trim().isEmpty()){
+            Toast.makeText(getApplicationContext(), "Complete todos los campos!", Toast.LENGTH_SHORT).show();
+        }else {
+            ConexionSqLiteHelper conn = new ConexionSqLiteHelper(this, "db_tareas", null, 1);
+            SQLiteDatabase db = conn.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(Utilidades.CAMPO_TAREA,tarea.getText().toString());
-        values.put(Utilidades.CAMPO_FECHA,fecha.getText().toString());
-        values.put(Utilidades.CAMPO_HORA,hora.getText().toString());
+            ContentValues values = new ContentValues();
 
-        Long idResultante = db.insert(Utilidades.TABLA_TAREAS,Utilidades.CAMPO_TAREA,values);
-        Toast.makeText(getApplicationContext(),"Se Ingreso Tarea : "+ idResultante ,Toast.LENGTH_SHORT).show();
-        db.close();
+            values.put(Utilidades.CAMPO_TAREA, tarea.getText().toString());
+            values.put(Utilidades.CAMPO_FECHA, fecha.getText().toString());
+            values.put(Utilidades.CAMPO_HORA, hora.getText().toString());
+            values.put(Utilidades.CAMPO_ESTADO, 1);
 
+            Toast.makeText(getApplicationContext(), "Se Ingresó Tarea ", Toast.LENGTH_SHORT).show();
+            db.close();
+            tarea.setText("");
+            fecha.setText("");
+            hora.setText("");
+        }
     }
 }

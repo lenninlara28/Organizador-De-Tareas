@@ -1,18 +1,22 @@
 package com.example.organizadordetareas.entidades;
 
-public class tareas {
+import java.io.Serializable;
 
+public class tareas implements Serializable {
 
     private String tarea;
     private String fecha;
     private String hora;
+    private String estado;
 
     public tareas(String tarea, String fecha, String hora) {
         this.tarea = tarea;
         this.fecha = fecha;
         this.hora = hora;
+        this.estado = "1";
+    }
 
-
+    public tareas() {
     }
 
     public String getTarea() {
@@ -37,5 +41,13 @@ public class tareas {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

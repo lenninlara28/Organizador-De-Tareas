@@ -14,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.organizadordetareas.Fragment.DoneFragment;
 import com.example.organizadordetareas.Fragment.MainFragment;
 import com.example.organizadordetareas.Fragment.calendarioFragment;
 import com.example.organizadordetareas.Fragment.configFragment;
@@ -72,10 +73,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
             fragmentTransaction.commit();
         }
         if (item.getItemId()== R.id.MyList){
-            fragmentManager = getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, new mylistFragment());
-            fragmentTransaction.commit();
+            Intent intent = new Intent(this, mylistFragment.class);
+            startActivity(intent);
         }
         if (item.getItemId()== R.id.Calendario){
             fragmentManager = getSupportFragmentManager();
@@ -88,6 +87,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new configFragment());
             fragmentTransaction.commit();
+        }
+        if (item.getItemId()== R.id.done){
+            Intent intent = new Intent(this, DoneFragment.class);
+            startActivity(intent);
         }
         return false;
     }

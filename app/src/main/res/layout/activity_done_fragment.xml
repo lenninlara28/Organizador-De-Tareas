@@ -1,54 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/RecycleId"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        />-->
+    tools:context=".Fragment.DoneFragment">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:orientation="vertical"
-        android:paddingTop="55dp"
-        android:background="@android:color/white">
+        tools:layout_editor_absoluteY="55dp">
 
         <TextView
             android:id="@+id/txtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Hoy"
-            android:textSize="25dp"
+            android:text="Tareas terminadas"
+            android:textSize="20sp"
             android:textStyle="normal|bold" />
 
         <LinearLayout
-            android:layout_marginTop="10sp"
+            android:id="@+id/linear2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/linear3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/alarma"
+                <ListView
+                    android:id="@+id/listViewTareas"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp"
-                    android:text="No hay tareas para hoy!"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
