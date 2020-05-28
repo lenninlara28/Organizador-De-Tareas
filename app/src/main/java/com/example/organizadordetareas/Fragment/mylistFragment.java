@@ -75,8 +75,7 @@ public class mylistFragment extends AppCompatActivity implements View.OnClickLis
         for (int i = 0; i<listaTareas.size(); i++){
             listaInformacion.add("Tarea: "+ listaTareas.get(i).getTarea()+
                                  "\nFecha: "+ listaTareas.get(i).getFecha()+
-                                 "\nHora: "+ listaTareas.get(i).getHora() +
-                                 "\nEstado: "+listaTareas.get(i).getEstado());
+                                 "\nHora: "+ listaTareas.get(i).getHora());
         }
     }
 

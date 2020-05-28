@@ -110,14 +110,15 @@ public class AddTaskActivity extends AppCompatActivity implements View.OnClickLi
             SQLiteDatabase db = conn.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-
             values.put(Utilidades.CAMPO_TAREA, tarea.getText().toString());
             values.put(Utilidades.CAMPO_FECHA, fecha.getText().toString());
             values.put(Utilidades.CAMPO_HORA, hora.getText().toString());
             values.put(Utilidades.CAMPO_ESTADO, 1);
 
+            Long idResultante = db.insert(Utilidades.TABLA_TAREAS,Utilidades.CAMPO_TAREA,values);
             Toast.makeText(getApplicationContext(), "Se Ingresó Tarea ", Toast.LENGTH_SHORT).show();
             db.close();
+
             tarea.setText("");
             fecha.setText("");
             hora.setText("");
